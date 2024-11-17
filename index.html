@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0c0a1f 0%, #1a1a3f 50%, #2a1a3f 100%);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 1s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(26, 26, 48, 0.8);
+      border-radius: 30px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.2);
+      max-width: 900px;
+      width: 95%;
+      animation: fadeIn 2s ease-in;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .name-container {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.5rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff69b4, #da70d6, #9370db);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+      animation: shimmer 3s infinite;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .name::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      color: #ffd1dc;
+      font-style: italic;
+      margin-top: 1rem;
+      font-family: 'Dancing Script', cursive;
+      text-shadow: 0 0 10px rgba(255, 209, 220, 0.5);
+    }
+
+    .hearts-container {
+      position: relative;
+      height: 60px;
+      margin: 2rem 0;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatHeart 4s infinite;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { top: 100%; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { top: -20%; opacity: 0; }
+    }
+    .hands-image {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  margin: 2rem auto;
+  background: linear-gradient(45deg, #2a1a3f, #1a1a3f);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hands-image::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+.hands-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Use "cover" or "contain" based on preference */
+  border-radius: 100px; /* Matches the container */
+}
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .poem {
+      font-size: 1.6rem;
+      line-height: 2;
+      margin: 3rem 0;
+      padding: 2rem;
+      border: none;
+      text-align: right;
+      direction: rtl;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(138, 43, 226, 0.1));
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .poem::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 80%;
+      background: linear-gradient(to bottom, #ff69b4, #da70d6);
+      border-radius: 2px;
+    }
+
+    .play-button {
+      background: linear-gradient(45deg, #ff69b4, #da70d6);
+      border: none;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
+                  0 0 30px rgba(255, 105, 180, 0.3);
+      margin: 2rem auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .play-button::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: buttonShine 2s infinite;
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4),
+                  0 0 50px rgba(255, 105, 180, 0.4);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 15px 0 15px 25px;
+      border-color: transparent transparent transparent #ffffff;
+      margin-left: 5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .music-notes-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .music-note {
+      position: absolute;
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes buttonShine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 2rem; }
+      .name { font-size: 3.5rem; }
+      .subtitle { font-size: 1.2rem; }
+      .poem { font-size: 1.3rem; }
+      .hands-image { height: 250px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 1.5rem; }
+      .name { font-size: 2.8rem; }
+      .subtitle { font-size: 1rem; }
+      .poem { font-size: 1.1rem; }
+      .hands-image { height: 200px; }
+      .play-button { width: 60px; height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="container">
+    <div class="name-container">
+      <h1 class="name">Devanshiii</h1>
+      <div class="subtitle">❤️❤️❤️❤️</div>
+    </div>
+
+    <div class="hearts-container">
+      <div class="floating-heart">❤️</div>
+    </div>
+    
+    <div class="hands-image">
+      <img src="/assets/devzz&me.jpg" alt="Holding Hands" />
+      <div class="music-notes-container"></div>
+    </div>
+
+    <div class="poem">
+        Your hand in mine, a vow I’ll keep,<br>
+        Through endless days and nights so deep.<br>
+        No shadow of doubt, no turning away,<br>
+        Forever beside you, come what may.<br>
+    </div>
+    
+
+    <button class="play-button" onclick="toggleMusic()">
+      <div class="play-icon"></div>
+    </button>
+  </div>
+
+  <script>
+    // Create starry background
+    function createStars() {
+      const starsContainer = document.querySelector('.stars');
+      for(let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        starsContainer.appendChild(star);
+      }
+    }
+
+    
+    // Create floating hearts
+    function createFloatingHearts() {
+      const container = document.querySelector('.hearts-container');
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDelay = '0s';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }, 2000);
+    }
+
+    // Create floating music notes
+    function createMusicNotes() {
+      const container = document.querySelector('.music-notes-container');
+      const notes = ['♪', '♫', '♬', '♩'];
+      setInterval(() => {
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+        note.style.left = `${Math.random() * 80 + 10}%`;
+        note.style.top = '80%';
+        note.style.animationDuration = `${2 + Math.random() * 2}s`;
+        container.appendChild(note);
+        setTimeout(() => note.remove(), 3000);
+      }, 300);
+    }
+
+    let isPlaying = false;
+    let audio = new Audio();
+    
+    function toggleMusic() {
+      if (!isPlaying) {
+        audio.src = 'assets/Make You Minee.mp3'; // Ensure the path matches your directory structure
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      isPlaying = !isPlaying;
+      
+      const playButton = document.querySelector('.play-button');
+      playButton.style.transform = isPlaying ? 'scale(0.95)' : 'scale(1)';
+    }
+
+    // Initialize effects
+    createStars();
+    createFloatingHearts();
+    createMusicNotes();
+  </script>
+</body>
+</html>
